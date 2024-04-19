@@ -19,5 +19,7 @@ public class TripDto implements Serializable {
     Instant startDate;
     Instant endDate;
     String author;
+    double latitude;
+    double longitude;
     List<TripTagDto> tags;
 }

@@ -8,6 +8,9 @@ import com.example.triphippiespring.repository.TripRepository;
 import com.example.triphippiespring.repository.TripTagRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +57,20 @@ public class TripService {
         }
     }
 
+    @Transactional
+    public List<TripDto> getTripsByQuery(@PathVariable String query) {
+        List<Trip> trips = tripRepository.findByNameContaining(query);
+        return trips.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<TripDto> getAllTrips() {
+        List<Trip> trips = tripRepository.findAll();
+        return trips.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
     /**
      * Convert entity to DTO

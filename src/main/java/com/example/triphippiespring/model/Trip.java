@@ -29,6 +29,12 @@ public class Trip {
 
     private String author;
 
+    //latitude and logitude as numbers
+
+    private double latitude;
+
+    private double longitude;
+
     @ManyToMany
     @JoinTable(
         name = "trip_trip_tag",
